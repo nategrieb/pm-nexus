@@ -3,7 +3,7 @@ import type { DragEvent } from "react";
 import { Link } from "react-router-dom";
 import { useEngineers, useUpdateEngineer, useCurrentTickets, useSprintPoints, useBlockedTickets } from "../hooks/useEngineers";
 import { useProjects } from "../hooks/useProjects";
-import { Users, ChevronDown, ChevronRight, UserX, UserCheck, Palmtree, ShieldAlert, Clock, FlaskConical } from "lucide-react";
+import { Users, ChevronDown, ChevronRight, UserX, UserCheck, Palmtree, ShieldAlert, Clock, FlaskConical, ExternalLink } from "lucide-react";
 import type { Engineer, Project } from "../types";
 import { currentTimeIn } from "../utils/timezones";
 
@@ -234,7 +234,20 @@ export default function EngineersPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-800 mb-6">Engineers</h1>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <h1 className="text-2xl font-bold text-slate-800">Engineers</h1>
+          <a
+            href="https://docs.google.com/spreadsheets/d/1-0OWS_PvVH9LVK2NOQ4n1jcYbSWWrGtcDAxkdo3KuLU/edit?gid=387010211#gid=387010211"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-medium transition-colors"
+          >
+            <ExternalLink size={14} />
+            P&T Team Directory
+          </a>
+        </div>
+      </div>
 
       {isLoading && (
         <div className="text-sm text-slate-400">Loading...</div>
