@@ -1,3 +1,4 @@
+# backend/app/config.py
 from pathlib import Path
 from pydantic_settings import BaseSettings
 
@@ -6,9 +7,13 @@ class Settings(BaseSettings):
         f"sqlite+aiosqlite:///{Path.home() / 'pm-nexus' / 'data' / 'pm_nexus.db'}"
     )
     unpointed_buffer: int = 3
-    # This maps to PM_NEXUS_VERIFY_SSL in your .env file
     verify_ssl: bool = True 
 
-    model_config = {"env_prefix": "PM_NEXUS_"}
+    # Add the env_file key here!
+    model_config = {
+        "env_prefix": "PM_NEXUS_",
+        "env_file": ".env",
+        "env_file_encoding": "utf-8"
+    }
 
 settings = Settings()
