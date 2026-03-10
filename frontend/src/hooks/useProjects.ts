@@ -27,3 +27,20 @@ export function useDeleteProject() {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["projects"] }),
   });
 }
+
+export function useUpdateProject() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: Parameters<typeof projectsApi.updateProject>[1] }) =>
+      projectsApi.updateProject(id, data),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["projects"] }),
+  });
+}
+
+export function useMergeProjects() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: projectsApi.mergeProjects,
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["projects"] }),
+  });
+}

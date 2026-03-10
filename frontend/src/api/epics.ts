@@ -12,5 +12,8 @@ export const createEpic = (data: {
   summary?: string;
 }) => api.post<Epic>("/epics", data).then((r) => r.data);
 
+export const moveEpic = (id: number, project_id: number) =>
+  api.patch<Epic>(`/epics/${id}`, { project_id }).then((r) => r.data);
+
 export const deleteEpic = (id: number) =>
   api.delete(`/epics/${id}`).then((r) => r.data);

@@ -15,6 +15,8 @@ SETTING_KEYS = [
     "jira_api_token",
     "jira_story_points_field",
     "unpointed_buffer",
+    "jira_board_id",
+    "jira_project_key",
 ]
 
 
@@ -45,8 +47,13 @@ async def update_settings(data: SettingsUpdate, db: AsyncSession = Depends(get_d
         "jira_api_token": data.jira_api_token,
         "jira_story_points_field": data.jira_story_points_field,
         "unpointed_buffer": str(data.unpointed_buffer),
+        "jira_board_id": data.jira_board_id,
+        "jira_project_key": data.jira_project_key,
     }
     for key, value in pairs.items():
+        # Don't overwrite token with empty string (frontend never sends real token)
+        if key == "jira_api_token" and not value:
+            continue
         result = await db.execute(select(Setting).where(Setting.key == key))
         existing = result.scalar_one_or_none()
         if existing:

@@ -15,6 +15,27 @@ export function useEngineer(id: number) {
   });
 }
 
+export function useCurrentTickets() {
+  return useQuery({
+    queryKey: ["engineers", "current-tickets"],
+    queryFn: engineersApi.getCurrentTickets,
+  });
+}
+
+export function useSprintPoints() {
+  return useQuery({
+    queryKey: ["engineers", "sprint-points"],
+    queryFn: engineersApi.getSprintPoints,
+  });
+}
+
+export function useBlockedTickets() {
+  return useQuery({
+    queryKey: ["engineers", "blocked-tickets"],
+    queryFn: engineersApi.getBlockedTickets,
+  });
+}
+
 export function useKanban(id: number) {
   return useQuery({
     queryKey: ["engineers", id, "kanban"],

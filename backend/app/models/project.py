@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 
-from sqlalchemy import Date, DateTime, String, func
+from sqlalchemy import Date, DateTime, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -15,6 +15,8 @@ class Project(Base):
     name: Mapped[str] = mapped_column(String(255))
     status: Mapped[str] = mapped_column(String(50), default="active")
     target_date: Mapped[datetime.date | None] = mapped_column(Date, nullable=True)
+    start_date: Mapped[datetime.date | None] = mapped_column(Date, nullable=True)
+    quarters: Mapped[str] = mapped_column(Text, default="[]")
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime, server_default=func.now()
     )
@@ -25,8 +27,12 @@ class Project(Base):
     documents: Mapped[list[Document]] = relationship(
         back_populates="project", cascade="all, delete-orphan"
     )
+    dependencies: Mapped[list[Dependency]] = relationship(
+        back_populates="project", cascade="all, delete-orphan"
+    )
 
 
 # Avoid circular imports — these are resolved at runtime by SQLAlchemy
+from app.models.dependency import Dependency  # noqa: E402
 from app.models.document import Document  # noqa: E402
 from app.models.epic import Epic  # noqa: E402

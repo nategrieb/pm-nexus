@@ -17,6 +17,10 @@ data/*.db
 .env
 .env.local
 
+# Claude Code (contains API tokens)
+.claude/settings.json
+.mcp.json
+
 # IDE
 .vscode/
 .idea/

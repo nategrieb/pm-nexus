@@ -11,6 +11,13 @@ class EngineerRead(BaseModel):
     weekly_hours: float
     manual_tags: list[str]
     auto_tags: list[str]
+    is_active: bool
+    timezone: str | None = None
+    ooo_start: str | None = None
+    ooo_end: str | None = None
+    sprint_capacity: float = 7.0
+    current_project_id: int | None = None
+    role: str = "engineer"
 
     model_config = {"from_attributes": True}
 
@@ -31,6 +38,13 @@ class EngineerUpdate(BaseModel):
     location: str | None = None
     weekly_hours: float | None = None
     manual_tags: list[str] | None = None
+    is_active: bool | None = None
+    timezone: str | None = None
+    ooo_start: str | None = None
+    ooo_end: str | None = None
+    sprint_capacity: float | None = None
+    current_project_id: int | None = None
+    role: str | None = None
 
 
 class EngineerDetail(EngineerRead):

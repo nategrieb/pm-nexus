@@ -14,6 +14,8 @@ class SettingsUpdate(BaseModel):
     jira_api_token: str = ""
     jira_story_points_field: str = "story_points"
     unpointed_buffer: int = 3
+    jira_board_id: str = ""
+    jira_project_key: str = ""
 
 
 class ConnectionTestResult(BaseModel):

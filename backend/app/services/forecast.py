@@ -38,8 +38,9 @@ async def calculate_forecast(
             calculated_end_date=None,
         )
 
+    excluded = ("done", "closed", "cancelled", "canceled")
     done_tickets = [t for t in tickets if t.status and t.status.lower() in ("done", "closed")]
-    remaining_tickets = [t for t in tickets if t.status and t.status.lower() not in ("done", "closed")]
+    remaining_tickets = [t for t in tickets if t.status and t.status.lower() not in excluded]
 
     completed_points = sum(t.points or 0 for t in done_tickets)
 

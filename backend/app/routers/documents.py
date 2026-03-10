@@ -22,7 +22,7 @@ async def list_documents(
 
 @router.post("/", response_model=DocumentRead)
 async def create_document(data: DocumentCreate, db: AsyncSession = Depends(get_db)):
-    doc = Document(project_id=data.project_id, doc_type=data.doc_type, url=data.url)
+    doc = Document(project_id=data.project_id, doc_type=data.doc_type, url=data.url, title=data.title)
     db.add(doc)
     await db.commit()
     await db.refresh(doc)

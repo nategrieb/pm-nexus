@@ -12,6 +12,7 @@ export const createDocument = (data: {
   project_id: number;
   doc_type: string;
   url: string;
+  title?: string;
 }) => api.post<Document>("/documents", data).then((r) => r.data);
 
 export const deleteDocument = (id: number) =>

@@ -16,6 +16,8 @@ export default function SettingsPage() {
     jira_api_token: "",
     jira_story_points_field: "story_points",
     unpointed_buffer: 3,
+    jira_board_id: "",
+    jira_project_key: "",
   });
   const [testResult, setTestResult] = useState<{
     success: boolean;
@@ -31,6 +33,8 @@ export default function SettingsPage() {
         jira_email: map.jira_email || "",
         jira_story_points_field: map.jira_story_points_field || "story_points",
         unpointed_buffer: parseInt(map.unpointed_buffer || "3", 10),
+        jira_board_id: map.jira_board_id || "",
+        jira_project_key: map.jira_project_key || "",
         // Don't overwrite token field with masked value
       }));
     }
@@ -122,6 +126,42 @@ export default function SettingsPage() {
           <p className="text-xs text-slate-400 mt-1">
             The Jira field name for story points. Common values:
             story_points, customfield_10016, customfield_10028
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-600 mb-1">
+            Jira Board ID
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. 192"
+            value={form.jira_board_id}
+            onChange={(e) =>
+              setForm({ ...form, jira_board_id: e.target.value })
+            }
+            className="w-32 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p className="text-xs text-slate-400 mt-1">
+            The Jira Scrum board ID for sprint planning. Find it in your board URL.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-600 mb-1">
+            Jira Project Key
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. CORE"
+            value={form.jira_project_key}
+            onChange={(e) =>
+              setForm({ ...form, jira_project_key: e.target.value })
+            }
+            className="w-32 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p className="text-xs text-slate-400 mt-1">
+            Jira project key for auto-discovering epics during sync.
           </p>
         </div>
 

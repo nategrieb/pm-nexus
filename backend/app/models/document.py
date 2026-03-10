@@ -13,6 +13,7 @@ class Document(Base):
     project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"))
     doc_type: Mapped[str] = mapped_column(String(50))  # PRD or TRD
     url: Mapped[str] = mapped_column(String(1000))
+    title: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     project: Mapped[Project] = relationship(back_populates="documents")
 
