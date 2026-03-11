@@ -76,7 +76,7 @@ async def get_current_tickets(db: AsyncSession = Depends(get_db)):
     return mapping
 
 
-DONE_STATUSES = ["Done", "Closed", "DONE", "Cancelled", "Canceled"]
+DONE_STATUSES = ["Done", "Closed", "DONE", "Cancelled", "Canceled", "Ready for Prod Release"]
 IN_FLIGHT_STATUSES = ["To Do", "In progress", "In Progress", "IN PROGRESS"]
 
 
@@ -187,7 +187,7 @@ async def get_kanban(engineer_id: int, db: AsyncSession = Depends(get_db)):
     result = await db.execute(
         select(Ticket).where(
             Ticket.assignee_id == engineer_id,
-            Ticket.status.notin_(["Done", "Closed", "DONE", "Cancelled", "Canceled"]),
+            Ticket.status.notin_(["Done", "Closed", "DONE", "Cancelled", "Canceled", "Ready for Prod Release"]),
             *_exclude_epics(),
         )
     )

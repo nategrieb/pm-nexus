@@ -179,7 +179,7 @@ export default function TicketTable({ tickets, gaps = [], engineerMap }: Props) 
 function StatusBadge({ status }: { status: string }) {
   const lower = status.toLowerCase();
   let color = "bg-slate-100 text-slate-600";
-  if (lower === "done" || lower === "closed")
+  if (lower === "done" || lower === "closed" || lower === "ready for prod release")
     color = "bg-emerald-100 text-emerald-700";
   else if (lower.includes("progress"))
     color = "bg-blue-100 text-blue-700";

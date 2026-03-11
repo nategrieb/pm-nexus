@@ -63,7 +63,7 @@ async def list_projects(db: AsyncSession = Depends(get_db)):
         done_case = func.coalesce(
             func.sum(
                 case(
-                    (func.lower(Ticket.status).in_(["done", "closed"]), Ticket.points),
+                    (func.lower(Ticket.status).in_(["done", "closed", "ready for prod release"]), Ticket.points),
                     else_=0,
                 )
             ),
@@ -94,7 +94,7 @@ async def list_projects(db: AsyncSession = Depends(get_db)):
             select(Ticket.epic_key, func.count(Ticket.id))
             .where(
                 Ticket.epic_key.in_(all_epic_keys),
-                func.lower(Ticket.status).notin_(["done", "closed"]),
+                func.lower(Ticket.status).notin_(["done", "closed", "ready for prod release"]),
                 (Ticket.points.is_(None) | (Ticket.points == 0)),
             )
             .group_by(Ticket.epic_key)
@@ -190,7 +190,7 @@ async def get_project(project_id: int, db: AsyncSession = Depends(get_db)):
 
     total_points = sum(t.points or 0 for t in tickets)
     completed_points = sum(
-        t.points or 0 for t in tickets if t.status and t.status.lower() == "done"
+        t.points or 0 for t in tickets if t.status and t.status.lower() in ("done", "closed", "ready for prod release")
     )
     engineer_ids = list({t.assignee_id for t in tickets if t.assignee_id is not None})
 

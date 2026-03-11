@@ -86,7 +86,7 @@ export default function EngineerDetailPage() {
     today <= engineer.ooo_end;
 
   const doneTickets = engineer.tickets.filter(
-    (t) => t.status.toLowerCase() === "done" || t.status.toLowerCase() === "closed"
+    (t) => t.status.toLowerCase() === "done" || t.status.toLowerCase() === "closed" || t.status.toLowerCase() === "ready for prod release"
   );
 
   return (

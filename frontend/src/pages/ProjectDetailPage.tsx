@@ -195,7 +195,7 @@ export default function ProjectDetailPage() {
 
   const engineerMap = new Map(allEngineers.map((e) => [e.id, e.name]));
 
-  const DONE_STATUSES = ["done", "closed", "cancelled", "canceled"];
+  const DONE_STATUSES = ["done", "closed", "cancelled", "canceled", "ready for prod release"];
   const activeTickets = tickets.filter(
     (t) => !DONE_STATUSES.includes(t.status.toLowerCase())
   );

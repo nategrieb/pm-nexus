@@ -39,7 +39,7 @@ async def gap_analysis(project_id: int, db: AsyncSession = Depends(get_db)):
     tickets = result.scalars().all()
     gaps = []
     for t in tickets:
-        if t.status and t.status.lower() == "done":
+        if t.status and t.status.lower() in ("done", "closed", "ready for prod release"):
             continue
         if t.points is None or t.points == 0:
             gaps.append(GapAnalysisItem(jira_key=t.jira_key, title=t.title, issue="unpointed"))

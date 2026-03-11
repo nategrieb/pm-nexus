@@ -12,7 +12,7 @@ import { AlertCircle, ChevronDown, ChevronRight } from "lucide-react";
 
 function statusColor(status: string): string {
   const s = status.toLowerCase();
-  if (s === "done" || s === "closed") return "bg-emerald-100 text-emerald-700";
+  if (s === "done" || s === "closed" || s === "ready for prod release") return "bg-emerald-100 text-emerald-700";
   if (s.includes("progress")) return "bg-blue-100 text-blue-700";
   if (s.includes("review")) return "bg-purple-100 text-purple-700";
   if (s.includes("qa")) return "bg-amber-100 text-amber-700";
