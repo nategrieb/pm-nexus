@@ -194,11 +194,12 @@ export default function SprintPlanningPage() {
   const [selectedSprintId, setSelectedSprintId] = useState<number | null>(null);
   const [unassignedOpen, setUnassignedOpen] = useState(true);
 
-  // Default to first active sprint
+  // Default to first future sprint, fallback to active, then to the first available
   useEffect(() => {
     if (sprints && sprints.length > 0 && selectedSprintId === null) {
+      const future = sprints.find((s) => s.state === "future");
       const active = sprints.find((s) => s.state === "active");
-      setSelectedSprintId(active?.id ?? sprints[0].id);
+      setSelectedSprintId(future?.id ?? active?.id ?? sprints[0].id);
     }
   }, [sprints, selectedSprintId]);
 
